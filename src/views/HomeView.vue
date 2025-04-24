@@ -1,17 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import FlowerIcon from '../assets/flower-svg.vue'
-
-type Post = {
-  id: number
-  title: string
-  status: string
-  created_at: string
-  updated_at: string
-  likes: number
-  slug: string
-  description: string
-}
+import PostItem from '@/components/PostItem.vue'
+import { type Post } from '@/types'
 
 type Category = {
   name: string
@@ -20,19 +10,17 @@ type Category = {
 
 const categories = ref<Category[]>([])
 
-fetch('/data/posts.json')
+fetch('http://localhost:8008/api/post/')
   .then((res) => res.json())
-  .then((data) => (categories.value = data.categories))
+  .then((data) => (categories.value = data))
 </script>
 
 <template>
   <div class="garden-chart">
     <li v-for="category in categories" :key="category.name" class="garden-plant">
       <div class="garden-post">
-        <li v-for="post in category.posts" :key="post.title">
-          <div class="home-post" :title="post.title">
-            <a :href="'/article/' + post.slug"></a>
-          </div>
+        <li v-for="post in category.posts" :key="post.title" class="post-item">
+          <PostItem :post="post" />
         </li>
       </div>
       <div class="home-category-name">
@@ -45,7 +33,7 @@ fetch('/data/posts.json')
 </template>
 
 <style>
-li {
+.post-item {
   list-style-type: none;
 
   width: fit-content;
@@ -60,22 +48,22 @@ li {
 
   grid-template-rows: 1fr 1fr;
 
-  justify-content: center;
-
-  gap: 12px;
+  justify-items: center;
 }
 
 .garden-post {
   align-self: self-end;
   justify-self: center;
+
+  padding: 12px;
 }
 
 .home-category-name {
   width: min-content;
 
-  writing-mode: vertical-lr;
+  /* writing-mode: vertical-lr; */
 
-  transform: rotate(180deg);
+  /* transform: rotate(350deg); */
 
   align-self: self-start;
 }
@@ -84,14 +72,7 @@ li {
   height: fit-content;
 }
 
-.home-post {
-  width: 25px;
-  height: 25px;
-
-  border: 2px solid black;
-}
-
-li:has(.home-post) + li:has(.home-post) > .home-post {
-  border-top: none;
+li:has(.home-post) + li:has(.home-post) .home-post {
+  margin-top: -2px;
 }
 </style>

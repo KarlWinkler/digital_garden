@@ -1,29 +1,75 @@
 <script setup lang="ts">
 import { watch, ref } from 'vue'
 import { useRoute } from 'vue-router'
+import { type Post } from '@/types'
+import { marked } from 'marked'
+import DOMPurify from 'dompurify'
 
 const route = useRoute()
-const content = ref('')
+const post = ref<Post | null>(null)
 
-fetch(`/data/${route.params.slug}.json`)
+fetch(`http://localhost:8008/api/post/${route.params.slug}`)
   .then((res) => res.json())
-  .then((data) => (content.value = data.content))
+  .then((data) => (post.value = data))
 
 watch(
   () => route.params.slug,
-  (newSlug, oldSlug) => {
+  (newSlug) => {
     console.log('FETCH')
-    fetch(`data/${newSlug}.json`)
+    fetch(`http://localhost:8008/api/post/${newSlug}`)
       .then((res) => res.json())
-      .then((data) => (content.value = data.content))
+      .then((data) => (post.value = data))
   },
 )
+
+const renderedMarkdown = () => {
+  if (post.value) {
+    return marked.parse(post.value.content)
+  }
+
+  return ''
+}
 </script>
 
 <template>
-  <p>The Article has the slug: {{ $route.params.slug }}</p>
+  <div class="container">
+    <div v-if="post" class="content">
+      <h1>{{ post.title }}</h1>
 
-  <div>
-    {{ content }}
+      <div class="metadata">
+        <p>status: {{ post.status }}</p>
+        <p>created: {{ new Date(post.created_at).toLocaleString() }}</p>
+        <p>updated: {{ new Date(post.updated_at).toLocaleString() }}</p>
+        <p>summary: {{ post.summary }}</p>
+      </div>
+
+      <div class="document" v-html="DOMPurify.sanitize(renderedMarkdown() as string)"></div>
+    </div>
   </div>
 </template>
+
+<style>
+.container {
+  display: flex;
+
+  align-items: center;
+
+  flex-direction: column;
+}
+
+.content {
+  max-width: 680px;
+}
+
+.metadata {
+  color: #aaa;
+}
+
+.metadata p {
+  margin: 0;
+}
+
+.document {
+  width: 680px;
+}
+</style>

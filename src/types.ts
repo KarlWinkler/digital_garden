@@ -6,7 +6,8 @@ export type Post = {
   updated_at: string
   likes: number
   slug: string
-  description: string
+  summary: string
+  content: string
 }
 
 export type Category = {

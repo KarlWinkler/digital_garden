@@ -1,0 +1,20 @@
+body {
+  --background-color: #f4eeee;
+  background-color: var(--background-color);
+}
+
+li {
+  list-style-type: inherit;
+}
+
+code {
+  background-color: #ddd;
+  border-radius: 2px;
+  padding: 4px;
+}
+
+pre {
+  background-color: #ddd;
+  border-radius: 2px;
+  padding: 4px;
+}

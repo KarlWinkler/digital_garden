@@ -7,7 +7,7 @@ import { RouterLink, RouterView } from 'vue-router'
     <div class="wrapper">
       <nav>
         <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/">About</RouterLink>
       </nav>
     </div>
   </header>
@@ -20,13 +20,6 @@ import { RouterLink, RouterView } from 'vue-router'
 </template>
 
 <style scoped>
-#app {
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-
-  min-height: 100vh;
-}
-
 header {
   line-height: 1.5;
   max-height: 100vh;
