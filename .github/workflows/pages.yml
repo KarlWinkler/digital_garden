@@ -43,7 +43,7 @@ jobs:
           npm run build
           echo "repository variable : $VITE_API_URL"
         env:
-          VITE_API_URL: ${{ secrets.VITE_API_URL }}
+          VITE_API_URL: ${{ env.VITE_API_URL }}
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
