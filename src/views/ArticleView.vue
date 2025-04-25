@@ -73,4 +73,14 @@ const renderedMarkdown = () => {
 .document {
   width: 680px;
 }
+
+@media screen and (max-width: 720px) {
+  .content {
+    max-width: 250px;
+  }
+
+  .document {
+    width: 250px;
+  }
+}
 </style>
