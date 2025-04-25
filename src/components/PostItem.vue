@@ -20,15 +20,15 @@ const hoverEffect = (e: MouseEvent) => {
   const mouseY = e.clientY
 
   const prop = document.querySelector(`.post-info-container.${props.post.slug}`) as HTMLElement
-  const parent = prop.closest('.home-post') as HTMLElement
-
-  const parentX = parent.getBoundingClientRect().x
-  const parentY = parent.getBoundingClientRect().y
-
-  const posX = mouseX - parentX
-  const posY = mouseY - parentY
-
   if (prop) {
+    const parent = prop.closest('.home-post') as HTMLElement
+
+    const parentX = parent.getBoundingClientRect().x
+    const parentY = parent.getBoundingClientRect().y
+
+    const posX = mouseX - parentX
+    const posY = mouseY - parentY
+
     prop.style.top = `${posY}px`
     prop.style.left = `${posX}px`
     prop.style.display = 'inline'
