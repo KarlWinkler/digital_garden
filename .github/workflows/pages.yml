@@ -41,7 +41,7 @@ jobs:
       - name: Build
         run: |
           npm run build
-          echo "repository variable : $VITE_API_URL"
+          cp dist/index.html dist/404.html
         env:
           VITE_API_URL: ${{ vars.VITE_API_URL }}
       - name: Setup Pages
