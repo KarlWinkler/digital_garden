@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import PostItem from '@/components/PostItem.vue'
 import { type Post } from '@/types'
+import { API_URL } from '@/environment'
 
 type Category = {
   name: string
@@ -10,7 +11,7 @@ type Category = {
 
 const categories = ref<Category[]>([])
 
-fetch('http://localhost:8008/api/post/')
+fetch(`${API_URL}/api/post/`)
   .then((res) => res.json())
   .then((data) => (categories.value = data))
 </script>

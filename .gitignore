@@ -15,6 +15,7 @@ coverage
 *.local
 
 .vite
+.env
 
 /cypress/videos/
 /cypress/screenshots/

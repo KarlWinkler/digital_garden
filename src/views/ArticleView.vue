@@ -4,11 +4,12 @@ import { useRoute } from 'vue-router'
 import { type Post } from '@/types'
 import { marked } from 'marked'
 import DOMPurify from 'dompurify'
+import { API_URL } from '@/environment'
 
 const route = useRoute()
 const post = ref<Post | null>(null)
 
-fetch(`http://localhost:8008/api/post/${route.params.slug}`)
+fetch(`${API_URL}/api/post/${route.params.slug}`)
   .then((res) => res.json())
   .then((data) => (post.value = data))
 
@@ -16,7 +17,7 @@ watch(
   () => route.params.slug,
   (newSlug) => {
     console.log('FETCH')
-    fetch(`http://localhost:8008/api/post/${newSlug}`)
+    fetch(`${API_URL}/api/post/${newSlug}`)
       .then((res) => res.json())
       .then((data) => (post.value = data))
   },
