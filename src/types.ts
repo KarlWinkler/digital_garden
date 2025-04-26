@@ -14,3 +14,14 @@ export type Category = {
   name: string
   posts: Post[]
 }
+
+export type Group = {
+  name: string
+}
+
+export type User = {
+  id: number
+  username: string
+  is_superuser: boolean
+  groups: Group[]
+}

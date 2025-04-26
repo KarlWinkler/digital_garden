@@ -1,5 +1,15 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
+import { store } from '@/store'
+import { API_URL } from './environment'
+
+console.log(store.user)
+const logout = () => {
+  fetch(`${API_URL}/api/user/auth/logout`, {
+    method: 'POST',
+  })
+  store.user = null
+}
 </script>
 
 <template>
@@ -9,6 +19,13 @@ import { RouterLink, RouterView } from 'vue-router'
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/">About</RouterLink>
       </nav>
+      <div class="user-info" v-if="store.user">
+        <span class="username">{{ store.user.username }}</span>
+        <span class="logout" @click="logout">Logout</span>
+      </div>
+      <div v-else>
+        <RouterLink to="/login">Login</RouterLink>
+      </div>
     </div>
   </header>
 
@@ -20,6 +37,14 @@ import { RouterLink, RouterView } from 'vue-router'
 </template>
 
 <style scoped>
+.wrapper {
+  display: flex;
+  width: 100%;
+
+  justify-content: space-between;
+  align-items: center;
+}
+
 header {
   line-height: 1.5;
   max-height: 100vh;
@@ -32,7 +57,6 @@ header {
 
 nav {
   display: flex;
-  width: 100%;
   font-size: 12px;
   text-align: center;
   margin-top: 2rem;
@@ -56,6 +80,18 @@ nav a:first-of-type {
   border: 0;
 }
 
+.user-info {
+  padding: 4px;
+}
+
+.username {
+  padding-right: 4px;
+}
+
+.logout {
+  text-decoration: underline;
+}
+
 @media (min-width: 1024px) {
   header {
     display: flex;
@@ -69,7 +105,6 @@ nav a:first-of-type {
 
   header .wrapper {
     display: flex;
-    place-items: flex-start;
     flex-wrap: wrap;
   }
 
