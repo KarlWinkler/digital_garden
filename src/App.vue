@@ -4,8 +4,24 @@ import { store } from '@/store'
 import { API_URL } from './environment'
 import { getCookie } from './helpers'
 
-console.log(store.user)
 const csrfToken = getCookie('csrftoken')
+const session = getCookie('refreshToken')
+if (session && csrfToken) {
+  fetch(`${API_URL}/api/user/self`, {
+    headers: {
+      'X-CSRFToken': csrfToken,
+    },
+    credentials: 'include',
+  })
+    .then((res) => {
+      if (res.ok) {
+        return res.json()
+      }
+    })
+    .then((data) => {
+      store.user = data
+    })
+}
 
 const logout = () => {
   if (csrfToken) {
@@ -17,7 +33,7 @@ const logout = () => {
     })
   }
 
-  document.cookie = 'user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+  document.cookie = 'refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
   store.user = null
 }
 </script>
