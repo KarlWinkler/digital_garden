@@ -6,6 +6,7 @@ import { getCookie } from './helpers'
 
 const csrfToken = getCookie('csrftoken')
 const session = getCookie('refreshToken')
+console.log(session, csrfToken)
 if (session && csrfToken) {
   fetch(`${API_URL}/api/user/self`, {
     headers: {
