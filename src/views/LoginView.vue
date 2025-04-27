@@ -18,6 +18,7 @@ if (session && csrfToken) {
     headers: {
       'X-CSRFToken': csrfToken,
     },
+    credentials: 'include',
   })
     .then((res) => {
       if (res.ok) {
@@ -45,6 +46,7 @@ const submitLogin = async () => {
     headers: {
       'Content-type': 'application/json',
     },
+    credentials: 'include',
   })
 
   if (response.ok) {
