@@ -4,14 +4,9 @@ import { store } from '@/store'
 import { API_URL } from './environment'
 import { getCookie } from './helpers'
 
-const csrfToken = getCookie('csrftoken')
 const session = getCookie('refreshToken')
-console.log(session, csrfToken)
-if (session && csrfToken) {
+if (session) {
   fetch(`${API_URL}/api/user/self`, {
-    headers: {
-      'X-CSRFToken': csrfToken,
-    },
     credentials: 'include',
   })
     .then((res) => {
@@ -25,12 +20,14 @@ if (session && csrfToken) {
 }
 
 const logout = () => {
+  const csrfToken = getCookie('csrftoken')
   if (csrfToken) {
     fetch(`${API_URL}/api/user/auth/logout`, {
       method: 'POST',
       headers: {
         'X-CSRFToken': csrfToken,
       },
+      credentials: 'include',
     })
   }
 
