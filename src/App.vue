@@ -2,12 +2,22 @@
 import { RouterLink, RouterView } from 'vue-router'
 import { store } from '@/store'
 import { API_URL } from './environment'
+import { getCookie } from './helpers'
 
 console.log(store.user)
+const csrfToken = getCookie('csrftoken')
+
 const logout = () => {
-  fetch(`${API_URL}/api/user/auth/logout`, {
-    method: 'POST',
-  })
+  if (csrfToken) {
+    fetch(`${API_URL}/api/user/auth/logout`, {
+      method: 'POST',
+      headers: {
+        'X-CSRFToken': csrfToken,
+      },
+    })
+  }
+
+  document.cookie = 'user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
   store.user = null
 }
 </script>

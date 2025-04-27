@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { API_URL } from '@/environment'
 import { store } from '@/store'
-import { getFutureTime, getCookie } from '@/helpers'
+import { getCookie } from '@/helpers'
 
 const email = ref<string>('')
 const password = ref<string>('')
@@ -11,21 +11,12 @@ const error = ref<string>('')
 
 const router = useRouter()
 
-const user = getCookie('user')
-if (user) {
-  store.user = JSON.parse(user)
-  router.push({ path: '/' })
-}
-
-const submitLogin = () => {
-  fetch(`${API_URL}/api/user/auth/login`, {
-    method: 'POST',
-    body: JSON.stringify({
-      email: email.value,
-      password: password.value,
-    }),
+const session = getCookie('refreshToken')
+const csrfToken = getCookie('csrftoken')
+if (session && csrfToken) {
+  fetch(`${API_URL}/api/user/self`, {
     headers: {
-      'Content-type': 'application/json; charset=UTF-8',
+      'X-CSRFToken': csrfToken,
     },
   })
     .then((res) => {
@@ -37,17 +28,40 @@ const submitLogin = () => {
     })
     .then((data) => {
       store.user = data
-      document.cookie = `user=${JSON.stringify(data)};expires=;path=/`
       router.push({ path: '/' })
     })
     .catch((res) => {
       error.value = res.message
     })
 }
+
+const submitLogin = async () => {
+  const response = await fetch(`${API_URL}/api/user/auth/login`, {
+    method: 'POST',
+    body: JSON.stringify({
+      email: email.value,
+      password: password.value,
+    }),
+    headers: {
+      'Content-type': 'application/json',
+    },
+  })
+
+  if (response.ok) {
+    const data = await response.json()
+    store.user = data
+    document.cookie = 'refreshToken=True;path=/;'
+    // router.push({ path: '/' })
+  } else if (response.status == 401) {
+    const data = await response.json()
+    error.value = data.message
+  }
+}
 </script>
 
 <template>
   <div class="form login-form">
+    <div class="error">{{ error }}</div>
     <div class="form-input">
       <label for="email">Email: </label>
       <input type="text" v-model="email" name="email" />
