@@ -73,4 +73,11 @@ span {
 .username {
   padding-right: 4px;
 }
+
+@media (max-width: 680px) {
+  a,
+  span {
+    margin: 12px;
+  }
+}
 </style>
