@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import { watch, ref } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { type Post } from '@/types'
 import { marked } from 'marked'
 import DOMPurify from 'dompurify'
 import { API_URL } from '@/environment'
+import { store } from '@/store'
 
 const route = useRoute()
+const router = useRouter()
 const post = ref<Post | null>(null)
 
 fetch(`${API_URL}/api/post/${route.params.slug}`)
@@ -30,11 +32,14 @@ const renderedMarkdown = () => {
 
   return ''
 }
+
+const edit = () => router.push({ path: `/article/${route.params.slug}/edit` })
 </script>
 
 <template>
   <div class="container">
     <div v-if="post" class="content">
+      <button v-if="store.user?.is_superuser" @click="edit">Edit</button>
       <h1>{{ post.title }}</h1>
 
       <div class="metadata">

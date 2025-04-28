@@ -33,6 +33,13 @@ watch(
   },
 )
 
+const updateTitle = (e: Event) => {
+  const target = e.target as HTMLInputElement
+  if (post.value) {
+    post.value.title = target.value
+  }
+}
+
 const updateContent = (e: Event) => {
   const target = e.target as HTMLInputElement
   if (post.value) {
@@ -61,6 +68,7 @@ const savePost = () => {
     fetch(`${API_URL}/api/post/${post.value?.id}`, {
       method: 'PUT',
       body: JSON.stringify({
+        title: post.value?.title,
         status: post.value?.status,
         summary: post.value?.summary,
         content: post.value?.content,
@@ -77,10 +85,19 @@ const savePost = () => {
 <template>
   <div class="container">
     <div v-if="post" class="content">
-      <h1>{{ post.title }}</h1>
-      <button @click="preview = !preview">{{ preview ? 'Preview' : 'Edit' }}</button>
+      <div class="action-buttons">
+        <button @click="preview = !preview">{{ preview ? 'Edit' : 'Preview' }}</button>
+        <button @click="savePost">Save</button>
+      </div>
 
       <div v-if="preview">
+        <h1>{{ post.title }}</h1>
+      </div>
+      <div v-else>
+        <input class="title-form" type="text" @change="updateTitle" :value="post.title" />
+      </div>
+
+      <div v-if="!preview">
         <div class="metadata-form">
           <p>
             status:
@@ -96,8 +113,6 @@ const savePost = () => {
         </div>
 
         <textarea :defaultValue="post.content" class="document-form" @change="updateContent" />
-
-        <button @click="savePost">Save</button>
       </div>
       <div v-else>
         <ArticleContent :post="post" :content="post.content" />
@@ -107,6 +122,14 @@ const savePost = () => {
 </template>
 
 <style>
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+
+  width: 64px;
+  gap: 4px;
+}
+
 .container {
   display: flex;
 
@@ -117,6 +140,12 @@ const savePost = () => {
 
 .content {
   max-width: 680px;
+}
+
+.title-form {
+  font-size: 32px;
+
+  margin: 24px 0;
 }
 
 .metadata-form p {
