@@ -17,6 +17,12 @@ if (!store.user?.is_superuser) {
   router.push({ path: `/article/${route.params.slug}` })
 }
 
+watch(store, (newStore) => {
+  if (!newStore.user) {
+    router.push({ path: `/article/${route.params.slug}` })
+  }
+})
+
 fetch(`${API_URL}/api/post/${route.params.slug}`)
   .then((res) => res.json())
   .then((data) => {
@@ -123,11 +129,9 @@ const savePost = () => {
 
 <style>
 .action-buttons {
-  display: flex;
-  flex-direction: column;
+  display: grid;
 
-  width: 64px;
-  gap: 4px;
+  width: 200px;
 }
 
 .container {

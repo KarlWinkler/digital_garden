@@ -40,16 +40,79 @@ const submitLogin = async () => {
 </script>
 
 <template>
-  <div class="form login-form">
+  <div class="container">
+    <h1>Login</h1>
     <div class="error">{{ error }}</div>
-    <div class="form-input">
-      <label for="email">Email: </label>
-      <input type="text" v-model="email" name="email" />
+    <div class="form login-form">
+      <div class="form-input">
+        <label for="email">Email: </label>
+        <input type="text" v-model="email" name="email" />
+      </div>
+      <div class="form-input">
+        <label for="Password">Password: </label>
+        <input type="password" v-model="password" name="password" />
+      </div>
     </div>
-    <div class="form-input">
-      <label for="Password">Password: </label>
-      <input type="password" v-model="password" name="password" />
-    </div>
-    <button @click="submitLogin">submit</button>
+    <button @click="submitLogin">Login</button>
   </div>
 </template>
+
+<style>
+.container {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+}
+
+.form {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  width: min-content;
+}
+
+.form-input {
+  display: grid;
+  grid-column: 1/3;
+  grid-template-columns: subgrid;
+
+  align-items: center;
+
+  margin: 12px;
+}
+
+label {
+  margin-right: 24px;
+}
+
+input[type='text'],
+input[type='password'] {
+  background-color: transparent;
+
+  border: 1px solid black;
+  border-radius: 4px;
+
+  padding: 12px;
+}
+
+button {
+  background-color: transparent;
+
+  border: 1px solid black;
+  border-radius: 4px;
+
+  margin: 12px;
+
+  padding: 6px 12px;
+
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #ed0bb4;
+  color: white;
+}
+</style>
