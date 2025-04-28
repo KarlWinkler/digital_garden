@@ -138,10 +138,6 @@ const savePost = () => {
   flex-direction: column;
 }
 
-.content {
-  max-width: 680px;
-}
-
 .title-form {
   font-size: 32px;
 
@@ -161,5 +157,20 @@ const savePost = () => {
 
   padding: 4px;
   margin: 16px 0;
+}
+
+@media screen and (max-width: 680px) {
+  .content {
+    max-width: 97%;
+    justify-content: flex-start;
+  }
+
+  .title-form {
+    max-width: 97%;
+  }
+
+  .document-form {
+    width: 97%;
+  }
 }
 </style>

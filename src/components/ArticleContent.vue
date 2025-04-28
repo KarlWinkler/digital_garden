@@ -9,15 +9,11 @@ const props = defineProps({
     type: Object as PropType<Post>,
     required: true,
   },
-  content: {
-    type: String,
-    required: true,
-  },
 })
 
 const renderedMarkdown = () => {
   if (props.post) {
-    return marked.parse(props.content)
+    return marked.parse(props.post.content)
   }
 
   return ''
@@ -37,7 +33,7 @@ const renderedMarkdown = () => {
   </div>
 </template>
 
-<style lang="css" scoped>
+<style lang="css">
 .content {
   max-width: 680px;
 }
@@ -54,13 +50,18 @@ const renderedMarkdown = () => {
   width: 680px;
 }
 
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 680px) {
   .content {
-    max-width: 250px;
+    max-width: 100%;
+    justify-content: flex-start;
+  }
+
+  .document code {
+    text-wrap: wrap;
   }
 
   .document {
-    width: 250px;
+    width: 100%;
   }
 }
 </style>
