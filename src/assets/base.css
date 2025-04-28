@@ -18,3 +18,7 @@ pre {
   border-radius: 2px;
   padding: 4px;
 }
+
+pre code {
+  background-color: transparent;
+}
