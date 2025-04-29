@@ -1,14 +1,17 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import PostItem from '@/components/PostItem.vue'
 import { type Post } from '@/types'
 import { API_URL } from '@/environment'
+import { store } from '@/store'
 
 type Category = {
   name: string
   posts: Post[]
 }
 
+const router = useRouter()
 const categories = ref<Category[]>([])
 
 fetch(`${API_URL}/api/post/`)
@@ -17,6 +20,9 @@ fetch(`${API_URL}/api/post/`)
 </script>
 
 <template>
+  <button v-if="store.user?.is_superuser" @click="router.push({ path: `/article/create` })">
+    new
+  </button>
   <div class="garden-chart">
     <li v-for="category in categories" :key="category.name" class="garden-plant">
       <div class="garden-post">
@@ -42,6 +48,8 @@ fetch(`${API_URL}/api/post/`)
 
 .garden-chart {
   display: flex;
+
+  padding: 24px;
 }
 
 .garden-plant {

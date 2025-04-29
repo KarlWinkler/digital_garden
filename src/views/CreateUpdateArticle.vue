@@ -13,6 +13,9 @@ const router = useRouter()
 const post = ref<Post | null>(null)
 const preview = ref<boolean>(false)
 
+const createEdit = route.fullPath.split('/').pop()
+console.log(route.fullPath)
+
 if (!store.user?.is_superuser) {
   router.push({ path: `/article/${route.params.slug}` })
 }
@@ -23,21 +26,24 @@ watch(store, (newStore) => {
   }
 })
 
-fetch(`${API_URL}/api/post/${route.params.slug}`)
-  .then((res) => res.json())
-  .then((data) => {
-    post.value = data
-  })
-
-watch(
-  () => route.params.slug,
-  (newSlug) => {
-    console.log('FETCH')
-    fetch(`${API_URL}/api/post/${newSlug}`)
-      .then((res) => res.json())
-      .then((data) => (post.value = data))
-  },
-)
+if (createEdit === 'edit') {
+  fetch(`${API_URL}/api/post/${route.params.slug}`)
+    .then((res) => res.json())
+    .then((data) => (post.value = data))
+} else {
+  post.value = {
+    title: '',
+    status: 'Seed',
+    created_at: '',
+    updated_at: '',
+    likes: 0,
+    summary: '',
+    content: '',
+    category: {
+      name: '',
+    },
+  }
+}
 
 const updateTitle = (e: Event) => {
   const target = e.target as HTMLInputElement
@@ -67,23 +73,58 @@ const updateSummary = (e: Event) => {
   }
 }
 
+const updateCategory = (e: Event) => {
+  const target = e.target as HTMLInputElement
+  if (post.value) {
+    post.value.category.name = target.value
+  }
+}
+
 const savePost = () => {
   const csrfToken = getCookie('csrftoken')
 
+  const requestData = JSON.stringify({
+    title: post.value?.title,
+    status: post.value?.status,
+    summary: post.value?.summary,
+    content: post.value?.content,
+    category: post.value?.category.name,
+  })
+
   if (csrfToken) {
-    fetch(`${API_URL}/api/post/${post.value?.id}`, {
-      method: 'PUT',
-      body: JSON.stringify({
-        title: post.value?.title,
-        status: post.value?.status,
-        summary: post.value?.summary,
-        content: post.value?.content,
-      }),
-      credentials: 'include',
-      headers: {
-        'X-CSRFToken': csrfToken,
-      },
-    }).then(() => router.push({ path: `/article/${post.value?.slug}` }))
+    if (createEdit === 'edit') {
+      fetch(`${API_URL}/api/post/${post.value?.id}`, {
+        method: 'PUT',
+        body: requestData,
+        credentials: 'include',
+        headers: {
+          'X-CSRFToken': csrfToken,
+        },
+      })
+        .then((res) => {
+          if (!res.ok) {
+            return Promise.reject(res)
+          }
+        })
+        .then(() => router.push({ path: `/article/${post.value?.slug}` }))
+        .catch(() => 'Failed to Save')
+    } else if (createEdit === 'create') {
+      fetch(`${API_URL}/api/post/`, {
+        method: 'POST',
+        body: requestData,
+        credentials: 'include',
+        headers: {
+          'X-CSRFToken': csrfToken,
+        },
+      })
+        .then((res) => {
+          if (!res.ok) {
+            return Promise.reject(res)
+          }
+        })
+        .then(() => router.push({ path: `/` }))
+        .catch(() => 'Failed to Save')
+    }
   }
 }
 </script>
@@ -116,6 +157,10 @@ const savePost = () => {
           <p>created: {{ new Date(post.created_at).toLocaleString() }}</p>
           <p>updated: {{ new Date(post.updated_at).toLocaleString() }}</p>
           <p>summary: <input type="text" :defaultValue="post.summary" @change="updateSummary" /></p>
+          <p>
+            category:
+            <input type="text" :defaultValue="post.category.name" @change="updateCategory" />
+          </p>
         </div>
 
         <textarea :defaultValue="post.content" class="document-form" @change="updateContent" />

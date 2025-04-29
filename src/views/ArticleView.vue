@@ -23,14 +23,17 @@ watch(
       .then((data) => (post.value = data))
   },
 )
-
-const edit = () => router.push({ path: `/article/${route.params.slug}/edit` })
 </script>
 
 <template>
   <div class="container">
     <div v-if="post" class="content">
-      <button v-if="store.user?.is_superuser" @click="edit">Edit</button>
+      <button
+        v-if="store.user?.is_superuser"
+        @click="router.push({ path: `/article/${route.params.slug}/edit` })"
+      >
+        Edit
+      </button>
       <h1>{{ post.title }}</h1>
 
       <ArticleContent :post="post" />

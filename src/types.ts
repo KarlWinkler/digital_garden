@@ -1,13 +1,16 @@
 export type Post = {
-  id: number
+  id?: number
   title: string
   status: string
   created_at: string
   updated_at: string
   likes: number
-  slug: string
+  slug?: string
   summary: string
   content: string
+  category: {
+    name: string
+  }
 }
 
 export type Category = {

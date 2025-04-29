@@ -10,6 +10,11 @@ const router = createRouter({
       component: HomeView,
     },
     {
+      path: '/article/create',
+      name: 'create-article',
+      component: () => import('../views/CreateUpdateArticle.vue'),
+    },
+    {
       path: '/article/:slug',
       name: 'article detail',
       // route level code-splitting
@@ -19,7 +24,7 @@ const router = createRouter({
     },
     {
       path: '/article/:slug/edit',
-      name: 'create-edit-article',
+      name: 'edit-article',
       component: () => import('../views/CreateUpdateArticle.vue'),
     },
     {
