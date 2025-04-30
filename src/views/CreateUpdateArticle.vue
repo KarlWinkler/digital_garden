@@ -42,7 +42,7 @@ if (createEdit === 'edit') {
     category: {
       name: '',
     },
-    comments: [],
+    top_level_comments: [],
   }
 }
 

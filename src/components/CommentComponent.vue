@@ -33,7 +33,7 @@ defineProps({
         })
       }}
     </p>
-    <p>{{ comment.content }}</p>
+    <p class="content">{{ comment.content }}</p>
     <NewComment button-name="Reply" v-if="store.user" :parent-id="comment.id" />
     <div v-for="comment in comment.children" :key="comment.id">
       <CommentComponent :comment="comment" />
@@ -45,7 +45,7 @@ defineProps({
 .name {
   font-weight: 700;
 
-  margin-bottom: 0;
+  margin: 0;
 }
 .date {
   color: #aaa;
@@ -53,6 +53,10 @@ defineProps({
   font-size: 12px;
   font-weight: 200;
 
-  margin-top: 0;
+  margin: 0;
+}
+
+.content {
+  margin: 10px 0;
 }
 </style>

@@ -48,7 +48,7 @@ provide('commentRefresh', commentRefresh)
       <h1>{{ post.title }}</h1>
 
       <ArticleContent :post="post" />
-      <CommentSection :comments="post.comments" :post-id="post.id" />
+      <CommentSection :comments="post.top_level_comments" :post-id="post.id" />
     </div>
   </div>
 </template>

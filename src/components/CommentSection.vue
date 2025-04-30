@@ -36,9 +36,17 @@ defineProps({
 .comment-section {
   align-self: flex-start;
 }
+
+.comments {
+  padding: 16px;
+  margin: 6px;
+
+  border-radius: 16px;
+}
+
 .comment .comment {
-  padding: 0 12px;
-  margin: 0 6px;
+  padding: 12px;
+  margin: 6px;
 
   border-left: 1px solid black;
 }

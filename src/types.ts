@@ -11,7 +11,7 @@ export type Post = {
   category: {
     name: string
   }
-  comments: Comment[]
+  top_level_comments: Comment[]
 }
 
 export type Category = {
