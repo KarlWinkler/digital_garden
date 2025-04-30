@@ -14,3 +14,9 @@ import HeaderComponent from '@/components/HeaderComponent.vue'
 
   <footer></footer>
 </template>
+
+<style>
+footer {
+  height: 64px;
+}
+</style>

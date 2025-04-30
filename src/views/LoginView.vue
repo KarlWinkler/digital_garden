@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { API_URL } from '@/environment'
 import { store } from '@/store'
 
@@ -8,6 +8,7 @@ const email = ref<string>('')
 const password = ref<string>('')
 const error = ref<string>('')
 
+const route = useRoute()
 const router = useRouter()
 
 if (store.user) {
@@ -31,7 +32,7 @@ const submitLogin = async () => {
     const data = await response.json()
     store.user = data
     document.cookie = 'refreshToken=True;path=/;'
-    router.push({ path: '/' })
+    router.push({ path: route.query.path ? (route.query.path as string) : '/' })
   } else if (response.status == 401) {
     const data = await response.json()
     error.value = data.message

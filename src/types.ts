@@ -11,6 +11,7 @@ export type Post = {
   category: {
     name: string
   }
+  comments: Comment[]
 }
 
 export type Category = {
@@ -27,4 +28,14 @@ export type User = {
   username: string
   is_superuser: boolean
   groups: Group[]
+}
+
+export type Comment = {
+  id: number
+  user: {
+    username: string
+  }
+  content: string
+  created_at: string
+  children: Comment[]
 }
