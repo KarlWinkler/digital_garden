@@ -60,5 +60,7 @@ provide('commentRefresh', commentRefresh)
   align-items: center;
 
   flex-direction: column;
+
+  padding: 12px;
 }
 </style>

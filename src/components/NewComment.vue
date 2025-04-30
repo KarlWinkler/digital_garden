@@ -58,7 +58,7 @@ const saveComment = async () => {
 <template>
   <div class="new-comment comment" v-if="create">
     <div class="form-input">
-      <textarea v-model="content" name="email" />
+      <textarea class="comment-form" v-model="content" name="comment" />
     </div>
     <button @click="create = false">cancel</button>
     <button @click="saveComment">save</button>
@@ -67,3 +67,9 @@ const saveComment = async () => {
     <button @click="create = true">{{ buttonName }}</button>
   </div>
 </template>
+
+<style>
+.comment-form {
+  background-color: transparent;
+}
+</style>
