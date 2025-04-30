@@ -25,10 +25,15 @@ const saveComment = async () => {
   if (csrfToken) {
     const response = await fetch(`${API_URL}/api/post/${route.params.slug}/comment`, {
       method: 'POST',
-      body: JSON.stringify({
-        content: content.value,
-        parent_id: props.parentId,
-      }),
+      body: JSON.stringify(
+        {
+          content: content.value,
+          parent_id: props.parentId,
+        },
+        (_, value) => {
+          if (value !== null) return value
+        },
+      ),
       credentials: 'include',
       headers: {
         'X-CSRFToken': csrfToken,
