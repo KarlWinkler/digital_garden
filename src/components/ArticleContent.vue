@@ -3,6 +3,7 @@ import { type PropType } from 'vue'
 import { type Post } from '../types.ts'
 import { marked } from 'marked'
 import DOMPurify from 'dompurify'
+import { formatDate } from '@/helpers.ts'
 
 const props = defineProps({
   post: {
@@ -21,11 +22,11 @@ const renderedMarkdown = () => {
 </script>
 
 <template>
-  <div v-if="post" class="content">
+  <div v-if="post" class="article-content">
     <div class="metadata">
       <p>status: {{ post.status }}</p>
-      <p>created: {{ new Date(post.created_at).toLocaleString() }}</p>
-      <p>updated: {{ new Date(post.updated_at).toLocaleString() }}</p>
+      <p>created: {{ formatDate(post.created_at) }}</p>
+      <p>updated: {{ formatDate(post.updated_at) }}</p>
       <p>summary: {{ post.summary }}</p>
     </div>
 
@@ -34,12 +35,18 @@ const renderedMarkdown = () => {
 </template>
 
 <style lang="css">
-.content {
+.article-content {
   max-width: 680px;
 }
 
 .metadata {
-  color: #aaa;
+  display: flex;
+
+  color: var(--color-midground);
+
+  font-size: 12px;
+
+  gap: 12px;
 }
 
 .metadata p {
@@ -51,7 +58,7 @@ const renderedMarkdown = () => {
 }
 
 @media screen and (max-width: 680px) {
-  .content {
+  .article-content {
     max-width: 100%;
     justify-content: flex-start;
   }

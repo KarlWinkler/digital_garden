@@ -37,7 +37,7 @@ provide('commentRefresh', commentRefresh)
 </script>
 
 <template>
-  <div class="container">
+  <div class="article-container">
     <div v-if="post" class="content">
       <button
         v-if="store.user?.is_superuser"
@@ -54,13 +54,12 @@ provide('commentRefresh', commentRefresh)
 </template>
 
 <style>
-.container {
+.article-container {
   display: flex;
+  flex-direction: column;
 
   align-items: center;
 
-  flex-direction: column;
-
-  padding: 12px;
+  padding: var(--spacing-6);
 }
 </style>

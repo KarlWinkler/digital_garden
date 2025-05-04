@@ -1,0 +1,31 @@
+body {
+  --color-background: #f4eeee;
+  --color-foreground: #000;
+  --color-midground: #aaa;
+
+  --color-highlight: #ed0bb4;
+
+  --color-background-code: #ddd;
+
+  --font-size-large: 32px;
+  --font-size-medium: 16px;
+  --font-size-small: 12px;
+
+  --spacing-1: 64px;
+  --spacing-2: 48px;
+  --spacing-3: 32px;
+  --spacing-4: 24px;
+  --spacing-5: 16px;
+  --spacing-6: 12px;
+  --spacing-7: 8px;
+  --spacing-8: 4px;
+  --spacing-9: 2px;
+
+  --border-width-large: 4px;
+  --border-width-medium: 2px;
+  --border-width-small: 1px;
+
+  --svg-width: 48px;
+
+  --border-radius-small: 4px;
+}

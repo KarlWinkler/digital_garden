@@ -16,3 +16,20 @@ export const getCookie = (name: string): string | null => {
 
   return found
 }
+
+export const formatDateTime = (date: string) =>
+  new Date(date).toLocaleString('en-us', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+    hour: '2-digit',
+    hour12: false,
+    minute: '2-digit',
+  })
+
+export const formatDate = (date: string) =>
+  new Date(date).toLocaleString('en-us', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  })

@@ -7,6 +7,8 @@ import { store } from '@/store'
 import { getCookie } from '@/helpers'
 import { API_URL } from '@/environment'
 
+import '@/assets/styles/form.css'
+
 const route = useRoute()
 const router = useRouter()
 
@@ -132,7 +134,7 @@ const savePost = () => {
 
 <template>
   <div class="container">
-    <div v-if="post" class="content">
+    <div v-if="post" class="article-content">
       <div class="action-buttons">
         <button @click="preview = !preview">{{ preview ? 'Edit' : 'Preview' }}</button>
         <button @click="savePost">Save</button>
@@ -147,21 +149,33 @@ const savePost = () => {
 
       <div v-if="!preview">
         <div class="metadata-form">
-          <p>
-            status:
-            <select :value="post.status" @change="updateStatus">
-              <option value="Seed">Seed</option>
-              <option value="Sprout">Sprout</option>
-              <option value="Flower">Flower</option>
-            </select>
-          </p>
-          <p>created: {{ new Date(post.created_at).toLocaleString() }}</p>
-          <p>updated: {{ new Date(post.updated_at).toLocaleString() }}</p>
-          <p>summary: <input type="text" :defaultValue="post.summary" @change="updateSummary" /></p>
-          <p>
-            category:
-            <input type="text" :defaultValue="post.category.name" @change="updateCategory" />
-          </p>
+          <div class="form-input">
+            <p>
+              status:
+              <select :value="post.status" @change="updateStatus">
+                <option value="Seed">Seed</option>
+                <option value="Sprout">Sprout</option>
+                <option value="Flower">Flower</option>
+              </select>
+            </p>
+          </div>
+          <div class="form-input">
+            <p>created: {{ new Date(post.created_at).toLocaleString() }}</p>
+          </div>
+          <div class="form-input">
+            <p>updated: {{ new Date(post.updated_at).toLocaleString() }}</p>
+          </div>
+          <div class="form-input">
+            <p>
+              summary: <input type="text" :defaultValue="post.summary" @change="updateSummary" />
+            </p>
+          </div>
+          <div class="form-input">
+            <p>
+              category:
+              <input type="text" :defaultValue="post.category.name" @change="updateCategory" />
+            </p>
+          </div>
         </div>
 
         <textarea :defaultValue="post.content" class="document-form" @change="updateContent" />
@@ -182,16 +196,13 @@ const savePost = () => {
 
 .container {
   display: flex;
+  flex-direction: column;
 
   align-items: center;
-
-  flex-direction: column;
 }
 
 .title-form {
-  font-size: 32px;
-
-  margin: 24px 0;
+  font-size: var(--font-size-large);
 }
 
 .metadata-form p {
@@ -200,17 +211,12 @@ const savePost = () => {
 
 .document-form {
   width: 680px;
-  height: fit-content;
-  field-sizing: content;
 
-  background-color: transparent;
-
-  padding: 4px;
-  margin: 16px 0;
+  margin: var(--spacing-5) 0;
 }
 
 @media screen and (max-width: 680px) {
-  .content {
+  .article-content {
     max-width: 97%;
     justify-content: flex-start;
   }

@@ -4,6 +4,8 @@ import { useRoute } from 'vue-router'
 import { API_URL } from '@/environment'
 import { getCookie } from '@/helpers'
 
+import '@/assets/styles/form.css'
+
 const create = ref<boolean>(false)
 const content = ref<string>('')
 
@@ -22,7 +24,7 @@ const commentRefresh = inject<() => void>('commentRefresh')
 
 const saveComment = async () => {
   const csrfToken = getCookie('csrftoken')
-  if (csrfToken) {
+  if (csrfToken && content.value) {
     const response = await fetch(`${API_URL}/api/post/${route.params.slug}/comment`, {
       method: 'POST',
       body: JSON.stringify(
@@ -67,9 +69,3 @@ const saveComment = async () => {
     <button @click="create = true">{{ buttonName }}</button>
   </div>
 </template>
-
-<style>
-.comment-form {
-  background-color: transparent;
-}
-</style>

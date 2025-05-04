@@ -37,13 +37,13 @@ const logout = () => {
 </script>
 
 <template>
-  <div class="wrapper">
+  <div class="header-container">
     <nav>
       <RouterLink to="/">Home</RouterLink>
       <RouterLink to="/">About</RouterLink>
     </nav>
     <div class="user-info" v-if="store.user">
-      <span class="username">{{ store.user.username }}</span> |
+      <span class="header-username">{{ store.user.username }}</span> |
       <RouterLink to="?" class="logout" @click="logout">Logout</RouterLink>
     </div>
     <div v-else>
@@ -54,30 +54,16 @@ const logout = () => {
 </template>
 
 <style scoped>
-.wrapper {
+.header-container {
   display: flex;
 
   justify-content: space-between;
   align-items: center;
 
-  padding: 24px;
+  padding: var(--spacing-4);
 }
 
-a,
-span {
-  text-decoration: none;
-
-  margin: 24px;
-}
-
-.username {
-  padding-right: 4px;
-}
-
-@media (max-width: 680px) {
-  a,
-  span {
-    margin: 12px;
-  }
+.header-username {
+  padding-right: var(--spacing-8);
 }
 </style>

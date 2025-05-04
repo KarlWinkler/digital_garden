@@ -4,6 +4,8 @@ import { useRoute, useRouter } from 'vue-router'
 import { API_URL } from '@/environment'
 import { store } from '@/store'
 
+import '@/assets/styles/form.css'
+
 const email = ref<string>('')
 const password = ref<string>('')
 const error = ref<string>('')
@@ -57,63 +59,3 @@ const submitLogin = async () => {
     <button @click="submitLogin">Login</button>
   </div>
 </template>
-
-<style>
-.container {
-  display: flex;
-  flex-direction: column;
-
-  justify-content: center;
-  align-items: center;
-}
-
-.form {
-  display: grid;
-
-  grid-template-columns: 1fr 1fr;
-
-  width: min-content;
-}
-
-.form-input {
-  display: grid;
-  grid-column: 1/3;
-  grid-template-columns: subgrid;
-
-  align-items: center;
-
-  margin: 12px;
-}
-
-label {
-  margin-right: 24px;
-}
-
-input[type='text'],
-input[type='password'] {
-  background-color: transparent;
-
-  border: 1px solid black;
-  border-radius: 4px;
-
-  padding: 12px;
-}
-
-button {
-  background-color: transparent;
-
-  border: 1px solid black;
-  border-radius: 4px;
-
-  margin: 12px;
-
-  padding: 6px 12px;
-
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #ed0bb4;
-  color: white;
-}
-</style>

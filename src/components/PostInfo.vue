@@ -25,8 +25,8 @@ defineProps({
 
   width: max-content;
 
-  border: 4px double black;
-  padding: 2px 12px;
+  border: var(--border-width-large) double black;
+  padding: var(--spacing-9) var(--spacing-6);
 }
 
 .post-info-container p {

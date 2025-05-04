@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&family=Victor+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+
+  font-family: Public Sans;
+
+  margin: 0;
+}
+
+li {
+  list-style-type: inherit;
+}
+
+code,
+pre {
+  font-family:
+    Victor Mono,
+    monospace;
+
+  font-size: var(--font-size-small);
+}
+
+code {
+  background-color: var(--color-background-code);
+  border-radius: 2px;
+  padding: 0 4px;
+}
+
+pre {
+  background-color: var(--color-background-code);
+  border-radius: 2px;
+  padding: 4px;
+}
+
+pre code {
+  background-color: transparent;
+}
+
+label {
+  margin-right: var(--spacing-4);
+}
+
+input[type='text'],
+input[type='password'] {
+  background-color: transparent;
+
+  border: 1px solid black;
+  border-radius: var(--border-radius-small);
+
+  padding: var(--spacing-7);
+}
+
+textarea {
+  field-sizing: content; /* only works on chrome */
+
+  background-color: transparent;
+
+  padding: var(--spacing-8);
+
+  border-radius: var(--border-radius-small);
+  border-color: var(--color-midground);
+}
+
+button {
+  background-color: transparent;
+
+  border: var(--border-width-small) solid black;
+  border-radius: var(--border-radius-small);
+
+  margin: var(--spacing-7) 0;
+
+  padding: var(--spacing-8) var(--spacing-6);
+
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: var(--color-highlight);
+  color: white;
+}
+
+a,
+span {
+  text-decoration: none;
+
+  margin: var(--spacing-4);
+}
+
+@media (max-width: 680px) {
+  a,
+  span {
+    margin: var(--spacing-6);
+  }
+}

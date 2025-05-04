@@ -1,0 +1,25 @@
+.form-container {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+}
+
+.form {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  width: min-content;
+}
+
+.form-input {
+  display: grid;
+  grid-column: 1/3;
+  grid-template-columns: subgrid;
+
+  align-items: center;
+
+  margin: var(--spacing-6) 0;
+}

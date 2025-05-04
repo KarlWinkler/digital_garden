@@ -40,12 +40,6 @@ fetch(`${API_URL}/api/post/`)
 </template>
 
 <style>
-.post-item {
-  list-style-type: none;
-
-  width: fit-content;
-}
-
 .garden-chart {
   display: flex;
 
@@ -68,13 +62,9 @@ fetch(`${API_URL}/api/post/`)
 }
 
 .home-category-name {
-  width: min-content;
-
-  /* writing-mode: vertical-lr; */
-
-  /* transform: rotate(350deg); */
-
   align-self: self-start;
+
+  width: min-content;
 }
 
 .home-category-name > p {

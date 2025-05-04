@@ -38,16 +38,17 @@ defineProps({
 }
 
 .comments {
-  padding: 16px;
-  margin: 6px;
+  padding: var(--spacing-5);
+  padding-left: 0;
+  margin: var(--spacing-8);
 
-  border-radius: 16px;
+  border-radius: var(--spacing-5);
 }
 
 .comment .comment {
-  padding: 12px;
-  margin: 6px;
+  padding: var(--spacing-6);
+  margin: var(--spacing-8);
 
-  border-left: 1px solid black;
+  border-left: 1px solid var(--color-midground);
 }
 </style>

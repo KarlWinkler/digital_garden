@@ -3,6 +3,7 @@ import { type PropType } from 'vue'
 import { type Comment } from '@/types.ts'
 import { store } from '@/store'
 import NewComment from '@/components/NewComment.vue'
+import { formatDateTime } from '@/helpers'
 
 defineProps({
   comment: {
@@ -20,20 +21,11 @@ defineProps({
 
 <template>
   <div class="comment">
-    <p class="name">{{ comment.user.username }}</p>
-    <p class="date">
-      {{
-        new Date(comment.created_at).toLocaleString('en-us', {
-          year: 'numeric',
-          month: 'short',
-          day: 'numeric',
-          hour: '2-digit',
-          hour12: false,
-          minute: '2-digit',
-        })
-      }}
+    <p class="comment-name">{{ comment.user.username }}</p>
+    <p class="comment-date">
+      {{ formatDateTime(comment.created_at) }}
     </p>
-    <p class="content">{{ comment.content }}</p>
+    <p class="comment-content">{{ comment.content }}</p>
     <NewComment button-name="Reply" v-if="store.user" :parent-id="comment.id" />
     <div v-for="comment in comment.children" :key="comment.id">
       <CommentComponent :comment="comment" />
@@ -42,21 +34,21 @@ defineProps({
 </template>
 
 <style>
-.name {
+.comment-name {
   font-weight: 700;
 
   margin: 0;
 }
-.date {
-  color: #aaa;
+.comment-date {
+  color: var(--color-midground);
 
-  font-size: 12px;
+  font-size: var(--font-size-small);
   font-weight: 200;
 
   margin: 0;
 }
 
-.content {
-  margin: 10px 0;
+.comment-content {
+  margin: var(--spacing-7) 0;
 }
 </style>

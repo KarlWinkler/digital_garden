@@ -49,14 +49,13 @@ const hoverEffect = (e: MouseEvent) => {
 <style>
 .home-post {
   position: relative;
-  --svg-width: 48px;
 
   width: var(--svg-width);
   height: var(--svg-width);
 
   margin: 0 var(--svg-width);
 
-  border: 2px solid black;
+  border: var(--border-width-medium) solid black;
 }
 
 .home-post:hover {
@@ -67,6 +66,16 @@ const hoverEffect = (e: MouseEvent) => {
   transition: all 0.05s;
 
   z-index: 999;
+}
+
+.post-item {
+  list-style-type: none;
+
+  width: fit-content;
+}
+
+.post-item a {
+  margin: 0;
 }
 
 .flower-left {
