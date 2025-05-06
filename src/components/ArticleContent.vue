@@ -57,14 +57,14 @@ const renderedMarkdown = () => {
   width: 680px;
 }
 
+.document a {
+  margin: var(--spacing-7);
+}
+
 @media screen and (max-width: 680px) {
   .article-content {
     max-width: 100%;
     justify-content: flex-start;
-  }
-
-  .document code {
-    text-wrap: wrap;
   }
 
   .document {

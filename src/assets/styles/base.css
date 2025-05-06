@@ -26,6 +26,7 @@ code {
   background-color: var(--color-background-code);
   border-radius: 2px;
   padding: 0 4px;
+  text-wrap: wrap;
 }
 
 pre {
