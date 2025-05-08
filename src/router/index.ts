@@ -37,6 +37,16 @@ const router = createRouter({
       name: 'signup',
       component: () => import('@/views/SignupView.vue'),
     },
+    {
+      path: '/comments-feed/',
+      name: 'comment-feed',
+      component: () => import('@/views/CommentFeedView.vue'),
+    },
+    {
+      path: '/profile/',
+      name: 'profile',
+      component: () => import('@/views/ProfileView.vue'),
+    },
   ],
 })
 

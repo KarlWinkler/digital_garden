@@ -53,7 +53,7 @@ const submitLogin = async () => {
     <div class="error">{{ error }}</div>
     <div class="form login-form">
       <div class="form-input">
-        <label for="username">Username: </label>
+        <label for="username">Username*: </label>
         <input type="text" v-model="username" name="username" />
       </div>
 
@@ -68,11 +68,11 @@ const submitLogin = async () => {
       </div>
 
       <div class="form-input">
-        <label for="email">Email: </label>
+        <label for="email">Email*: </label>
         <input type="text" v-model="email" name="email" />
       </div>
       <div class="form-input">
-        <label for="Password">Password: </label>
+        <label for="Password">Password*: </label>
         <input type="password" v-model="password" name="password" />
       </div>
     </div>

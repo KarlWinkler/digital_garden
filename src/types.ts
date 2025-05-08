@@ -26,6 +26,7 @@ export type Group = {
 export type User = {
   id: number
   username: string
+  email: string
   is_superuser: boolean
   groups: Group[]
 }
@@ -38,4 +39,13 @@ export type Comment = {
   content: string
   created_at: string
   children: Comment[]
+}
+
+export type PostComment = {
+  id: number
+  username: string
+  content: string
+  created_at: string
+  post_slug: string
+  post_title: string
 }

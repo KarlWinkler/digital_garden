@@ -43,7 +43,7 @@ const logout = () => {
       <RouterLink to="/">About</RouterLink>
     </nav>
     <div class="user-info" v-if="store.user">
-      <span class="header-username">{{ store.user.username }}</span> |
+      <RouterLink to="/profile" class="header-username">{{ store.user.username }}</RouterLink> |
       <RouterLink to="?" class="logout" @click="logout">Logout</RouterLink>
     </div>
     <div v-else>

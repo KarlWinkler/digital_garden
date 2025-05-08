@@ -38,7 +38,7 @@ provide('commentRefresh', commentRefresh)
 
 <template>
   <div class="article-container">
-    <div v-if="post" class="content">
+    <div v-if="post">
       <button
         v-if="store.user?.is_superuser"
         @click="router.push({ path: `/article/${route.params.slug}/edit` })"

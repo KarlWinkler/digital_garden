@@ -36,7 +36,7 @@ const renderedMarkdown = () => {
 
 <style lang="css">
 .article-content {
-  max-width: 680px;
+  max-width: var(--full-width);
 }
 
 .metadata {
@@ -44,18 +44,18 @@ const renderedMarkdown = () => {
 
   color: var(--color-midground);
 
-  font-size: 12px;
+  font-size: var(--font-size-small);
 
-  gap: 12px;
+  gap: var(--spacing-6);
 }
 
 .metadata p {
   margin: 0;
 }
 
-.document {
+/* .document {
   width: 680px;
-}
+} */
 
 .document a {
   margin: var(--spacing-7);
